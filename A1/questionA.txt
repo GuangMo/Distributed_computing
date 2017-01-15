@@ -1,0 +1,27 @@
+a. Describe your algorithm in words and pseudo code. 
+
+   Given matrix size of m x n, and vector size of n. Since vector prduct would require each entry of a row of the matrix multiply and add up with each entry of the vector, my approach would assign task to each process based on size on n, so that each process can work on multiplication locally. Then once multiplication is done on each process, the results will send back to one process,which does additions of the results. 
+
+Pseudo code: 
+
+  Divide matrix and vector into processes based on size of n, each column of the matrix will be stored as an array, and each entry of vector will be stored in a variable. 
+			||
+			||
+			\/ 
+ Compute multiplication on each process: For first row of computation, each process access first element of the array, and multiply with the variable. Number of arrays and number of variables on each process will be decided based on the size of n. Note that each of multiplication actually corresponding to matrix-vector product .
+			||
+			||	
+			\/ 
+ Send back results to master process: assign one of the process to be the master, then once computation is done on each process, the master receives the result, and sum up all the results based on each row of the matrix which will be identify based on the index of the arrays. 
+			||
+			||
+			\/ 
+ Output result and we are done!   
+
+F. Develop test cases and discuss how you check that computations are correct. 
+1. It should compute correct results.
+	This is the fundamental requirement for this program. This can be checked by insert debug code in matrix and vector generation functions to output the results, then use either calculator or matlab to verify the output. 
+2. Various number of process gives the same output
+	Result should be consistent despite different number of processes are used for computation. Good thing for drand48() is that it generates the same numbers everytime(at least on my machine!), so we can just substitute different number of process with fixing number of rows and column. Note, extreme condition must be tested such as 1 process.  
+3. Test on distribution to process to ensure no work is left and work is distributed evenly. 
+	Again, this can be checked by inserting debug code in distributor function to output process rank and the assigned data. 

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+export THREAD_COUNT=1
+echo -e "\nThreads: 1\n" > output
+make clean
+make julia >> output
+make runx >> output
+
+export THREAD_COUNT=2
+echo -e "\nThreads: 2" >> output
+make clean
+make julia >> output
+make runx >> output
+
+export THREAD_COUNT=4
+echo -e "\nThreads: 4\n" >> output
+make clean
+make julia >> output
+make runx >> output
+
+export THREAD_COUNT=8
+echo -e "\nThreads: 8\n" >> output
+make clean
+make julia >> output
+make runx >> output
+
+export THREAD_COUNT=16
+echo -e "\nThreads: 16\n" >> output
+make clean
+make julia >> output
+make runx >> output
+
+export THREAD_COUNT=32
+echo -e "\nThreads: 32\n" >> output
+make clean
+make julia >> output
+make runx >> output
